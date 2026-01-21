@@ -36,8 +36,7 @@ body {
 /* Expander Styling */
 details {
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: none;
   padding: 12px 16px;
 }
 
@@ -52,16 +51,6 @@ summary::-webkit-details-marker {
   display: none;
 }
 
-summary::after {
-  content: "➕";
-  float: right;
-  font-size: 20px;
-  transition: transform 0.2s;
-}
-
-details[open] summary::after {
-  content: "➖";
-}
 
 .divider {
   height: 2px;
@@ -195,3 +184,4 @@ details[open] summary::after {
 
 </body>
 </html>
+
