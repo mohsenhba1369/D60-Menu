@@ -13,7 +13,7 @@ body {
   background: #fafafa;
 }
 
-  /* Popup background */
+/* Popup background */
 .popup {
   display: none;
   position: fixed;
@@ -81,23 +81,23 @@ details[open] summary::after {
   margin-top: 12px;
 }
 
-
 .card {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 14px;
   padding: 10px;
-  display: flex;              /* 👈 مهم */
+  display: flex;
   align-items: center;
   gap: 12px;
 }
 
 .card img {
-  width: 90px;                /* عکس کوچیک‌تر */
+  width: 90px;
   height: 90px;
   object-fit: cover;
   border-radius: 10px;
   flex-shrink: 0;
+  cursor: pointer; /* makes it feel clickable */
 }
 
 .card-text {
@@ -113,7 +113,6 @@ details[open] summary::after {
   margin: 0;
   font-weight: bold;
 }
-
 </style>
 </head>
 
@@ -126,19 +125,20 @@ details[open] summary::after {
   <summary>🍔 Smash Burgers</summary>
   <div class="items">
 
-<div class="card">
-  <img src="https://github.com/mohsenhba1369/D60-Menu/raw/main/D_MexicanCorn_Native.jpg" alt="Classic Burger">
-  <div class="card-text">
-    <h3>Classic Burger</h3>
-    <p>$10.99</p>
-  </div>
-</div>
-
+    <div class="card">
+      <img src="https://github.com/mohsenhba1369/D60-Menu/raw/main/D_MexicanCorn_Native.jpg" alt="Classic Burger">
+      <div class="card-text">
+        <h3>Classic Burger</h3>
+        <p>$10.99</p>
+      </div>
+    </div>
 
     <div class="card">
       <img src="images/cheese-burger.jpg" alt="Cheese Burger">
-      <h3>Cheese Burger</h3>
-      <p>$12.99</p>
+      <div class="card-text">
+        <h3>Cheese Burger</h3>
+        <p>$12.99</p>
+      </div>
     </div>
 
   </div>
@@ -148,13 +148,13 @@ details[open] summary::after {
 <details class="section">
   <summary>🥪 Sandwiches</summary>
   <div class="items">
-
     <div class="card">
       <img src="images/falafel.jpg" alt="Falafel">
-      <h3>Falafel</h3>
-      <p>$9.99</p>
+      <div class="card-text">
+        <h3>Falafel</h3>
+        <p>$9.99</p>
+      </div>
     </div>
-
   </div>
 </details>
 
@@ -162,20 +162,24 @@ details[open] summary::after {
 <details class="section">
   <summary>🍟 Appetizers</summary>
   <div class="items">
-
     <div class="card">
       <img src="images/fries.jpg" alt="Fries">
-      <h3>Special Fries</h3>
-      <p>$6.99</p>
+      <div class="card-text">
+        <h3>Special Fries</h3>
+        <p>$6.99</p>
+      </div>
     </div>
-
   </div>
 </details>
+
+<!-- Popup -->
 <div id="popup" class="popup">
   <span class="close">&times;</span>
   <img id="popup-img" class="popup-content">
 </div>
-  <script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
   const popup = document.getElementById("popup");
   const popupImg = document.getElementById("popup-img");
   const closeBtn = document.querySelector(".close");
@@ -194,29 +198,8 @@ details[open] summary::after {
   popup.addEventListener("click", (e) => {
     if (e.target === popup) popup.style.display = "none";
   });
+});
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
