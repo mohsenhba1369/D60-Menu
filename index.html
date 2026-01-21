@@ -7,58 +7,41 @@
 
 <style>
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  padding: 16px;
-  background: #fafafa;
+  padding: 24px;
+  background: #fff8e1;
+  color: #333;
 }
 
-/* Popup background */
-.popup {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
+h1 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 24px;
+  color: #222;
 }
 
-/* Popup image */
-.popup-content {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 12px;
-}
-
-/* Close button */
-.close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 40px;
-  color: white;
-  cursor: pointer;
-}
-
+/* Section styling */
 details.section {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  border: 2px solid #f3c623;
+  border-radius: 12px;
+  background: #fff3c0;
+  padding: 8px;
 }
 
 summary {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
-  padding: 14px;
+  padding: 12px 16px;
   background: #f3c623;
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   list-style: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #222;
 }
 
 summary::-webkit-details-marker {
@@ -75,44 +58,77 @@ details[open] summary::after {
 }
 
 .items {
-  display: grid;
-  grid-template-columns: 1fr; /* one item per row */
-  gap: 12px;
-  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
 }
 
 .card {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 14px;
-  padding: 10px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .card img {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 8px;
+  cursor: pointer;
   flex-shrink: 0;
-  cursor: pointer; /* makes it feel clickable */
 }
 
 .card-text {
-  text-align: left;
+  margin-left: 16px;
+  flex-grow: 1;
 }
 
 .card-text h3 {
-  font-size: 15px;
-  margin: 0 0 4px;
+  font-size: 18px;
+  margin: 0 0 6px;
+  font-weight: 600;
 }
 
 .card-text p {
+  font-size: 16px;
   margin: 0;
   font-weight: bold;
+  color: #444;
 }
+
+/* Popup styling */
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}
+
 </style>
 </head>
 
@@ -203,3 +219,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
