@@ -1,229 +1,193 @@
-<html lang="en"><head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D60 Restaurant Menu</title>
 
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-      background: #f8f6f1;
-      color: #222;
-    }
 
-    header {
-      background: #1f1f1f;
-      color: #fff;
-      padding: 16px;
-      text-align: center;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D60 Restaurant</title>
 
-    header h1 {
-      margin: 0;
-      font-size: 22px;
-      letter-spacing: 1px;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 16px;
-    }
-
-    .section {
-      margin-bottom: 28px;
-    }
-
-    .section h2 {
-      border-bottom: 2px solid #c9a23f;
-      padding-bottom: 6px;
-      margin-bottom: 12px;
-      font-size: 20px;
-    }
-
-    .note {
-      font-size: 13px;
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    .item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      gap: 10px;
-    }
-
-    .item-name {
-      font-weight: 600;
-    }
-
-    .item-desc {
-      font-size: 13px;
-      color: #555;
-      margin-top: 2px;
-    }
-
-    .price {
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    .badge {
-      color: #d9534f;
-      font-size: 13px;
-      margin-left: 4px;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 12px;
-      color: #666;
-      padding: 20px;
-    }
-
-    @media (max-width: 600px) {
-      .item {
-        flex-direction: column;
-      }
-      .price {
-        align-self: flex-end;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <h1>D60 Restaurant Menu</h1>
-</header>
 <style>
-.card img {
-  width: 100%;
-  height: 150px;        /* ← اندازه عکس */
-  object-fit: cover;   /* عکس کش نیاد */
-  border-radius: 10px;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f9f7f2;
+  color: #111;
+}
+
+.header {
+  background: #1e1e1e;
+  color: #fff;
+  text-align: center;
+  padding: 18px;
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+.section {
+  margin-bottom: 30px;
+    background: #f9f7f2;
+
+}
+
+/* Expander Styling */
+details {
+  background: #fff;
+  border: none;
+  padding: 12px 16px;
+}
+
+summary {
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+
+.divider {
+  height: 2px;
+  background: #c9a227;
+  margin: 12px 0 18px 0;
+}
+
+.note {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 16px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.item-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.item-desc {
+  font-size: 14px;
+  color: #444;
+  margin-top: 2px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
 }
 </style>
+</head>
+
+<body>
+
+<div class="header">D60 Restaurant Menu</div>
 
 <div class="container">
 
   <!-- Appetizers -->
   <div class="section">
-    <h2>Appetizers &amp; Snacks</h2>
+    <details>
+      <summary>Appetizers & Snacks</summary>
+      <div class="divider"></div>
 
-    <div class="item">
-      <div>
-        <div class="item-name">Caesar Salad</div>
-        <div class="item-desc">With breaded chicken</div>
+      <div class="item">
+        <div>
+          <div class="item-name">Caesar Salad</div>
+          <div class="item-desc">With breaded chicken</div>
+        </div>
+        <div class="price">$8.99</div>
       </div>
-      <div class="price">$8.99</div>
-    </div>
 
-    <div class="item">
-      <div class="item-name">Special Fries</div>
-      <div class="price">$9.99</div>
-    </div>
+      <div class="item">
+        <div class="item-name">Special Fries</div>
+        <div class="price">$9.99</div>
+      </div>
 
-    <div class="item">
-      <div class="item-name">Special Poutine</div>
-      <div class="price">$9.99</div>
-    </div>
+      <div class="item">
+        <div class="item-name">Special Poutine</div>
+        <div class="price">$9.99</div>
+      </div>
+    </details>
   </div>
 
-  <!-- Burgers -->
+  <!-- Smash Burgers -->
   <div class="section">
-    <h2>Smash Burgers</h2>
-    <div class="note">
-      All include: Tomato, Pickle, Lettuce, Special Sauce<br>
-      Choose your free side: Fries, Coleslaw, Garden Salad
-    </div>
+    <details>
+      <summary>Smash Burgers</summary>
+      <div class="divider"></div>
 
-    <div class="item">
-      <div>
-        <div class="item-name">Classic Burger</div>
-        <div class="item-desc">2×100g beef patties, caramelized onion</div>
+      <div class="note">
+        All include: Tomato, Pickle, Lettuce, Special Sauce<br>
+        Choose your free side: Fries, Coleslaw, Garden Salad
       </div>
-      <div class="price">$10.99</div>
-    </div>
 
-    <div class="item">
-      <div>
-        <div class="item-name">Jalapeño Burger <span class="badge">🌶</span></div>
-        <div class="item-desc">Cheddar, caramelized onion, jalapeño</div>
+      <div class="item">
+        <div>
+          <div class="item-name">Classic Burger</div>
+          <div class="item-desc">2×100g beef patties, caramelized onion</div>
+        </div>
+        <div class="price">$10.99</div>
       </div>
-      <div class="price">$13.99</div>
-    </div>
 
-    <div class="item">
-      <div>
-        <div class="item-name">D60 Special Burger</div>
-        <div class="item-desc">Beef tongue, cheddar, BBQ sauce</div>
+      <div class="item">
+        <div>
+          <div class="item-name">Jalapeño Burger 🌶</div>
+          <div class="item-desc">Cheddar, caramelized onion, jalapeño</div>
+        </div>
+        <div class="price">$13.99</div>
       </div>
-      <div class="price">$17.99</div>
-    </div>
+
+      <div class="item">
+        <div>
+          <div class="item-name">D60 Special Burger</div>
+          <div class="item-desc">Beef tongue, cheddar, BBQ sauce</div>
+        </div>
+        <div class="price">$17.99</div>
+      </div>
+    </details>
   </div>
 
   <!-- Sandwiches -->
   <div class="section">
-    <h2>Sandwiches</h2>
-    <div class="note">
-      All include: Tomato, Pickle, Lettuce, Special Sauce<br>
-      Add Cheese &amp; Mushroom: $2.50
-    </div>
+    <details>
+      <summary>Sandwiches</summary>
+      <div class="divider"></div>
 
-    <div class="item">
-      <div class="item-name">Falafel <span class="badge">🌶</span></div>
-      <div class="price">$12.99</div>
-    </div>
+      <div class="item">
+        <div class="item-name">Chicken Sandwich</div>
+        <div class="price">$9.99</div>
+      </div>
 
-    <div class="item">
-      <div class="item-name">Bandari <span class="badge">🌶</span></div>
-      <div class="price">$15.99</div>
-    </div>
-  </div>
+      <div class="item">
+        <div class="item-name">Beef Sandwich</div>
+        <div class="price">$10.99</div>
+      </div>
 
-  <!-- Desserts -->
-  <div class="section">
-    <h2>Desserts</h2>
-
-    <div class="item">
-      <div class="item-name">Traditional Saffron Ice Cream</div>
-      <div class="price">$5.99</div>
-    </div>
-
-    <div class="item">
-      <div class="item-name">Faloodeh &amp; Ice Cream</div>
-      <div class="price">$6.99</div>
-    </div>
-  </div>
-
-  <!-- Drinks -->
-  <div class="section">
-    <h2>Drinks</h2>
-
-    <div class="item">
-      <div class="item-name">Glass Coca Cola</div>
-      <div class="price">$4.99</div>
-    </div>
-
-    <div class="item">
-      <div class="item-name">Abali Doogh</div>
-      <div class="price">$4.99</div>
-    </div>
-<div class="card">
-  <img src="D:\D60\Photos\Uber\D_CheeseBurger_Native.jpg">
-  <h3>Classic Burger</h3>
-  <p>$10.99</p>
-</div>
+      <div class="item">
+        <div class="item-name">Veggie Sandwich</div>
+        <div class="price">$8.99</div>
+      </div>
+    </details>
   </div>
 
 </div>
 
-<footer>
-  © D60 Restaurant — QR Menu
-</footer>
+</body>
+</html>
 
 
 
-</body></html>
