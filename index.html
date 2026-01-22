@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +69,13 @@ summary::-webkit-details-marker {
 .item {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 14px;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.item-info {
+  flex: 1;
 }
 
 .item-name {
@@ -82,13 +86,23 @@ summary::-webkit-details-marker {
 .item-desc {
   font-size: 14px;
   color: #444;
-  margin-top: 2px;
+  margin: 4px 0;
 }
 
 .price {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
+  margin-top: 4px;
 }
+
+.item-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
 </style>
 </head>
 
@@ -104,6 +118,21 @@ summary::-webkit-details-marker {
       <summary>Appetizers & Snacks</summary>
       <div class="divider"></div>
 
+
+      <div class="item">
+  <div class="item-info">
+    <div class="item-name">Special Fries</div>
+    <div class="item-desc">Large Cut Fries, Delies, Cheese & Mushroom</div>
+    <div class="price">$11.99</div>
+  </div>
+
+  <img class="item-img"
+       src="D_MexicanCorn_Native.jpg"
+       alt="Special Fries">
+</div>
+
+
+      
       <div class="item">
         <div class="item-name">Fries (S / L)</div>
         <div class="price">$4.99 / 7.99</div>
