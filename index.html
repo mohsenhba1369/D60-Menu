@@ -53,13 +53,13 @@ summary::-webkit-details-marker {
   display: none;
 }
 
-summary::after {
+summary::before  {
   content: "▶";
   font-size: 16px;
   transition: transform 0.2s ease;
 }
 
-details[open] summary::after {
+details[open] summary::before  {
   transform: rotate(90deg);
 }
 
@@ -546,6 +546,7 @@ modal.onclick = function () {
 
 </body>
 </html>
+
 
 
 
