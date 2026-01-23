@@ -1,212 +1,701 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>D60 Restaurant</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D60 Restaurant</title>
 
-<style>
-    :root {
-        --bg: #f9f7f2;
-        --primary: #1e1e1e;
-        --accent: #c9a227;
-        --text: #111;
-        --radius: 12px;
-    }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f9f7f2;
+            color: #111;
+        }
 
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-    }
+        .header {
+            background: #1e1e1e;
+            color: #fff;
+            text-align: center;
+            padding: 18px;
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
 
-    .header {
-        background: var(--primary);
-        color: #fff;
-        text-align: center;
-        padding: 20px;
-        font-size: 28px;
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px 20px;
+        }
 
-    .container {
-        max-width: 900px;
-        margin: auto;
-        padding: 20px;
-    }
+        .section {
+            margin-bottom: 30px;
+        }
 
-    .section {
-        margin-bottom: 40px;
-    }
+        /* Expander Styling */
+        details {
+            background: #f9f7f2;
+            border: none;
+            padding: 12px 16px;
+        }
 
-    /* Accordion */
-    details {
-        background: var(--bg);
-        padding: 12px;
-    }
+        summary {
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            list-style: none;
+        }
 
-    summary {
-        font-size: 22px;
-        font-weight: bold;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
+            summary::-webkit-details-marker {
+                display: none;
+            }
 
-    summary::marker { display: none; }
+            summary::before {
+                content: "▶";
+                font-size: 16px;
+                transition: transform 0.2s ease;
+            }
 
-    summary::before {
-        content: "▶";
-        font-size: 16px;
-        transition: transform .2s ease;
-    }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
 
-    details[open] summary::before {
-        transform: rotate(90deg);
-    }
 
-    .divider {
-        height: 2px;
-        background: var(--accent);
-        margin: 12px 0 20px;
-    }
 
-    /* Menu Items */
-    .item {
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 12px;
-        margin-bottom: 18px;
-        gap: 15px;
-    }
+        .divider {
+            height: 2px;
+            background: #c9a227;
+            margin: 12px 0 18px 0;
+        }
 
-    .item-info {
-        flex: 1;
-    }
+        .note {
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 16px;
+        }
 
-    .item-name {
-        font-size: 18px;
-        font-weight: bold;
-    }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 12px;
+        }
 
-    .item-desc {
-        font-size: 14px;
-        color: #555;
-        margin: 4px 0;
-    }
+        .item-info {
+            flex: 1;
+        }
 
-    .price {
-        font-size: 16px;
-        font-weight: bold;
-        margin-top: 6px;
-    }
+        .item-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
 
-    .item-img {
-        width: 80px;
-        height: 80px;
-        object-fit: cover;
-        border-radius: var(--radius);
-        transition: .2s ease;
-        cursor: pointer;
-    }
+        .item-desc {
+            font-size: 14px;
+            color: #444;
+            margin: 4px 0;
+        }
 
-    .item-img:hover {
-        transform: scale(1.05);
-    }
+        .price {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 4px;
+        }
 
-    /* Modal */
-    .modal {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,0.85);
-        z-index: 999;
-    }
+        .item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
 
-    .modal-content {
-        max-width: 90%;
-        max-height: 90%;
-        margin: 5% auto;
-        border-radius: var(--radius);
-        display: block;
-    }
+        .item-img {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
 
-    .close {
-        position: fixed;
-        top: 20px;
-        right: 30px;
-        font-size: 40px;
-        color: #fff;
-        cursor: pointer;
-        font-weight: bold;
-    }
-</style>
+            .item-img:hover {
+                transform: scale(1.05);
+            }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            margin-top: 5%;
+            border-radius: 12px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- Modal -->
-<div id="imgModal" class="modal">
-    <span class="close">&times;</span>
-    <img id="modalImg" class="modal-content" />
-</div>
-
-<div class="header">D60 Restaurant Menu</div>
-<div class="container">
+    <div id="imgModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
 
 
-<!-- ===================================================== -->
-<!--                 SAMPLE SECTION TEMPLATE               -->
-<!--        (Your items go here exactly as structured)     -->
-<!-- ===================================================== -->
 
-<div class="section">
-    <details open>
-        <summary>Appetizers & Snacks</summary>
-        <div class="divider"></div>
+    <div class="header">D60 Restaurant Menu</div>
 
-        <div class="item">
-            <div class="item-info">
-                <div class="item-name">Special Fries</div>
-                <div class="item-desc">Large Cut Fries, Deli, Cheese & Mushroom</div>
-                <div class="price">$11.99</div>
+    <!------------------------------ Appetizers ------------------------------>
+    <div class="section">
+
+        <details>
+            <summary>Appetizers & Snacks</summary>
+            <div class="divider"></div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Special Fries</div>
+                    <div class="item-desc">Large Cut Fries, Delies, Cheese &amp; Mushroom</div>
+                    <div class="price">$11.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Special Fries">
             </div>
-            <img loading="lazy" class="item-img" src="D_MexicanCorn_Native.jpg" alt="Special Fries">
-        </div>
 
-        <!-- repeat same structure for each menu item... -->
-    </details>
-</div>
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Fries (S | L)</div>
+                    <div class="item-desc"></div>
+                    <div class="price">$4.99 | $7.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Fries (S | L)">
+            </div>
 
-<!-- (Your Smash Burgers, Sandwiches, Drinks, etc. follow with the SAME structure.) -->
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Poutine (S | L)</div>
+                    <div class="item-desc"></div>
+                    <div class="price">$6.99 | $9.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Poutine (S | L)">
+            </div>
 
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Sweet Potato Fries</div>
+                    <div class="item-desc"></div>
+                    <div class="price">$6.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Sweet Potato Fries">
+            </div>
 
-</div>
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Special Fries</div>
+                    <div class="item-desc">Large Cut Fries, Delies, Cheese &amp; Mushroom</div>
+                    <div class="price">$11.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Special Fries">
+            </div>
 
-<script>
-    const modal = document.getElementById("imgModal");
-    const modalImg = document.getElementById("modalImg");
-    const closeBtn = document.querySelector(".close");
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Special Poutine</div>
+                    <div class="item-desc">Large Cut Fries, Delies, Mushroom</div>
+                    <div class="price">$11.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Special Poutine">
+            </div>
 
-    document.querySelectorAll(".item-img").forEach(img => {
-        img.addEventListener("click", () => {
-            modal.style.display = "block";
-            modalImg.src = img.src;
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Chicken Tenders &amp; Fries</div>
+                    <div class="item-desc"></div>
+                    <div class="price">$11.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Chicken Tenders &amp; Fries">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Chips &amp; Cheese</div>
+                    <div class="item-desc">Classic Chips, Delies, Cheese &amp; Mushroom</div>
+                    <div class="price">$10.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Chips &amp; Cheese">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Onion Ring</div>
+                    <div class="item-desc"></div>
+                    <div class="price">6.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Onion Ring">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Crispy Mushroom</div>
+                    <div class="item-desc"></div>
+                    <div class="price">$6.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Crispy Mushroom">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Galric Bread</div>
+                    <div class="item-desc"></div>
+                    <div class="price">$8.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Galric Bread">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Falafel</div>
+                    <div class="item-desc">5 Pieces</div>
+                    <div class="price">$5.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Falafel">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Mexican Corn</div>
+                    <div class="item-desc">Corn mixed with creamy sauce, spices</div>
+                    <div class="price">$6.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Mexican Corn">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Spinach &amp; Cheese Dip</div>
+                    <div class="item-desc"></div>
+                    <div class="price">$10.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Spinach &amp; Cheese Dip">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Caesar Salad</div>
+                    <div class="item-desc">breaded chicken | Grill</div>
+                    <div class="price">$10.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Caesar Salad">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Garden Salad</div>
+                    <div class="item-desc"></div>
+                    <div class="price">$5.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Garden Salad">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Coleslaw</div>
+                    <div class="item-desc"></div>
+                    <div class="price">$3.99</div>
+                </div>
+                <img class="item-img"
+                     src="D_MexicanCorn_Native.jpg"
+                     alt="Coleslaw">
+            </div>
+        </details>
+
+    </div>
+
+    <!------------------------------ Smash Burgers ------------------------------>
+    <div class="section">
+
+        <details>
+            <summary>Smash Burgers</summary>
+            <div class="divider"></div>
+
+            <div class="item-name">Free Side (Choose one): </div>
+            <div class="note">Fries | Coleslaw | Garden Salad</div>
+            <br>
+
+            <div class="item-name">Upgrade your side: </div>
+            <div class="note">Poutine (+$3.5) | Onion Rings (+$3) | Sweet Potato (+$2.5) | Caesar (+$4.5)</div>
+            <br>
+
+            <div class="item-name">Add-ons: </div>
+            <div class="note">Patty (+$3.5) | Mushroom (+$2.0) | Jalapeno (+$1.5) | Pineapple (+$2.5) | Brie (+$2.5) | Bacon (+$3.5) | Cheese (+$3.5) | Egg (+$3.5)</div>
+            <br>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Savor Saver</div>
+                    <div class="item-desc">1×100g beef patties, caramelized onion, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$10.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Savor Saver">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Classic Burger</div>
+                    <div class="item-desc">2×100g beef patties, caramelized onion, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Classic Burger">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Cheese Burger</div>
+                    <div class="item-desc">2×100g beef patties, Cheddar, caramelized onion, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Cheese Burger">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Hawaii Burger</div>
+                    <div class="item-desc">2×100g beef patties, Cheddar, Pineapple, caramelized onion, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Hawaii Burger">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Mushroom Burger</div>
+                    <div class="item-desc">2×100g beef patties, Cheddar, Mushroom, Mozzarella, caramelized onion, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Mushroom Burger">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Jalapeño Burger 🌶</div>
+                    <div class="item-desc">2×100g beef patties, Cheddar, jalapeño, caramelized onion, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Jalapeño Burger">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Bacon Burger</div>
+                    <div class="item-desc">2×100g beef patties, Cheddar, Beef Bacon, caramelized onion, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Bacon Burger">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Grill Chicken Burger</div>
+                    <div class="item-desc">Grilled Chicken Breast, Brie, Pesto, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Grill Chicken Burger">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Chrispy Chicken Burger</div>
+                    <div class="item-desc">Chrispy Chicken Leg, Cheddar Cheese, Coleslaw</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Chrispy Chicken Burger">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Veggie Burger</div>
+                    <div class="item-desc">Cheddar, caramelized onion, jalapeño</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Veggie Burger">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Sunny Side Burger</div>
+                    <div class="item-desc">1×100g beef patties, Cheddar, caramelized onion, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Sunny Side Burger">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">D60 Special Burger</div>
+                    <div class="item-desc">2×100g beef patties, Cheddar, Beef tongue, caramelized onion, Tomato, Pickle, Lettuce, Special Sauce, BBQ sauce</div>
+                    <div class="price">$17.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="D60 Special Burger">
+            </div>
+
+        </details>
+
+    </div>
+
+    <!------------------------------ Sandwiches ------------------------------>
+
+    <div class="section">
+        <details>
+            <summary>Sandwiches</summary>
+            <div class="divider"></div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">D60 Special</div>
+                    <div class="item-desc">Roasted Deli (Beef|Chicken|Mix), Hotdog, Cheese, Mushroom, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="D60 Special">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Hotdog</div>
+                    <div class="item-desc">Hotdog, Onion and Parsley, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Hotdog">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Pulled Beef</div>
+                    <div class="item-desc">Pulled Beef, Green Pepper, Cheese, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Pulled Beef">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Chicken</div>
+                    <div class="item-desc">Chicken Breast, Cheddar, Mushroom, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Chicken">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Falafel</div>
+                    <div class="item-desc">Falafel, Mango Pickle, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Falafel">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Roasted Deli</div>
+                    <div class="item-desc">Roasted Deli (Beef|Chicken|Mix), Cheese, Mushroom , Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Roasted Deli">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Cold Deli</div>
+                    <div class="item-desc">Deli (Beef|Chicken|Mix), Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Cold Deli">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Bandari</div>
+                    <div class="item-desc">Sliced Beef Sausages marinated in Onion and Tomato Paste, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Bandari">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Cocktail</div>
+                    <div class="item-desc">Beef Sausages, Onion and Parsley, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Cocktail">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Krakow</div>
+                    <div class="item-desc">Cheese Krakow Sausage, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Krakow">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Tongue and Brain</div>
+                    <div class="item-desc">Beef Tongue and Brain, Onion and Parsley, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Tongue and Brain">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Tongue</div>
+                    <div class="item-desc">Beef Tongue, Onion and Parsley, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Tongue">
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Brain</div>
+                    <div class="item-desc">Beef Brain, Onion and Parsley, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Brain">
+            </div>
+
+        </details>
+    </div>
+
+    <!------------------------------ Drinks ------------------------------>
+    <div class="section">
+        <details>
+            <summary>Drinks</summary>
+            <div class="divider"></div>
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Brain</div>
+                    <div class="item-desc">Beef Brain, Onion and Parsley, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Brain">
+            </div>
+
+        </details>
+    </div>
+
+    <!------------------------------ Bar ------------------------------>
+    <div class="section">
+        <details>
+            <summary>Bar</summary>
+            <div class="divider"></div>
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Brain</div>
+                    <div class="item-desc">Beef Brain, Onion and Parsley, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Brain">
+            </div>
+        </details>
+    </div>
+
+    <!------------------------------ Desserts ------------------------------>
+    <div class="section">
+        <details>
+            <summary>Desserts</summary>
+            <div class="divider"></div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-name">Brain</div>
+                    <div class="item-desc">Beef Brain, Onion and Parsley, Tomato, Pickle, Lettuce, Special Sauce</div>
+                    <div class="price">$13.99</div>
+                </div>
+                <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="Brain">
+            </div>
+
+        </details>
+    </div>
+
+    <script>
+        const modal = document.getElementById("imgModal");
+        const modalImg = document.getElementById("modalImg");
+        const closeBtn = document.querySelector(".close");
+
+        document.querySelectorAll(".item-img").forEach(img => {
+            img.onclick = function () {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+            }
         });
-    });
 
-    closeBtn.onclick = () => modal.style.display = "none";
-    modal.onclick = () => modal.style.display = "none";
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+        };
 
-    document.addEventListener("keydown", e => {
-        if (e.key === "Escape") modal.style.display = "none";
-    });
-</script>
+        modal.onclick = function () {
+            modal.style.display = "none";
+        };
+    </script>
 
 </body>
 </html>
-
