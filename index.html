@@ -16,7 +16,6 @@
     --border: #e0e0e0;
 }
 
-/* Base */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -24,7 +23,6 @@ body {
     color: var(--text);
 }
 
-/* Header */
 .header {
     background: var(--header-bg);
     color: var(--header-fg);
@@ -32,10 +30,8 @@ body {
     padding: 18px;
     font-size: 26px;
     font-weight: bold;
-    letter-spacing: 1px;
 }
 
-/* Review button under header */
 .review-wrap {
     text-align: center;
     margin: 10px 0 20px;
@@ -50,30 +46,76 @@ body {
     background: var(--accent);
     padding: 6px 14px;
     border-radius: 20px;
-    transition: background 0.15s ease, transform 0.15s ease;
 }
 
-.review-link:hover {
-    background: #b08d21;
-    transform: translateY(-1px);
-}
-
-/* Layout */
 .container {
     max-width: 900px;
     margin: auto;
     padding: 0 20px 40px;
 }
 
-/* Expander (details / summary) */
 details {
     border-bottom: 1px solid var(--border);
     padding: 8px 0;
 }
 
-/* Remove default arrows */
 summary {
     list-style: none;
     cursor: pointer;
     font-size: 18px;
-    font-weight: b
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::marker {
+    content: "";
+}
+
+summary::before {
+    content: "▶";
+    margin-right: 10px;
+    transition: transform 0.2s ease;
+}
+
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.details-content {
+    padding: 10px 0 20px 26px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">D60 Restaurant</div>
+
+<div class="review-wrap">
+    <a class="review-link" href="#">
+        ★ Leave a Review
+    </a>
+</div>
+
+<div class="container">
+
+    <details open>
+        <summary>Burgers</summary>
+        <div class="details-content">
+            Choose 1 free side: Fries · Coleslaw · Garden Salad<br><br>
+            Upgrade: Poutine (+$3.5) · Onion Rings (+$3.0)<br><br>
+            Add-ons: Bacon · Cheese · Egg
+        </div>
+    </details>
+
+</div>
+
+</body>
+</html>
