@@ -77,11 +77,39 @@
         }
 
 
-        summary {
-            background: transparent; /* اگر اصلاً کادر نمی‌خواهید */
-            padding: 12px 16px; /* همان فاصله قبلی، اما روی summary */
-            border-radius: 0; /* اگر کادر گرد نمی‌خواهید */
-        }
+     summary {
+    background: transparent;
+    padding: 12px 16px;
+    border-radius: 0;
+    cursor: pointer;
+
+    /* 🔴 مهم */
+    list-style: none;
+}
+
+/* Chrome / Safari */
+summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Firefox */
+summary::marker {
+    content: "";
+}
+
+/* فلش اختصاصی */
+summary::before {
+    content: "▶";
+    font-size: 16px;
+    margin-right: 10px;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+
 
 
             summary:focus-visible {
@@ -90,19 +118,7 @@
                 border-radius: 6px;
             }
 
-            summary::-webkit-details-marker {
-                display: none;
-            }
-
-            summary::before {
-                content: "▶";
-                font-size: 16px; /* unchanged */
-                transition: transform 0.2s ease;
-            }
-
-        details[open] summary::before {
-            transform: rotate(90deg);
-        }
+          
 
         .divider {
             height: 2px;
@@ -875,3 +891,4 @@
 
 </body>
 </html>
+
