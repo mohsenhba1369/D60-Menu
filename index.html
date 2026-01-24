@@ -68,23 +68,21 @@
         }
 
         /* Expander Styling */
+
         details {
-            background: var(--bg);
+            background: transparent; /* قبلاً var(--bg) بود */
+            padding: 0; /* پدینگ را به summary منتقل می‌کنیم */
+            border-radius: 0; /* گوشه گرد را حذف می‌کنیم */
             border: none;
-            padding: 12px 16px;
-            border-radius: var(--radius);
         }
 
+
         summary {
-            font-size: 22px; /* unchanged */
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            list-style: none;
-            outline: none;
+            background: transparent; /* اگر اصلاً کادر نمی‌خواهید */
+            padding: 12px 16px; /* همان فاصله قبلی، اما روی summary */
+            border-radius: 0; /* اگر کادر گرد نمی‌خواهید */
         }
+
 
             summary:focus-visible {
                 outline: 2px dashed var(--accent);
