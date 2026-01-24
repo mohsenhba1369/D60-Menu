@@ -1,183 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>D60 Restaurant</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D60 Restaurant</title>
 
-<style>
-    :root{
-        --bg: #f9f7f2;
-        --text: #111;
-        --header-bg: #1e1e1e;
-        --header-fg: #fff;
-        --accent: #c9a227;
-        --muted: #444;
-        --border: #e0e0e0;
-        --radius: 12px;
-        --overlay: rgba(0,0,0,0.8);
-    }
+    <style>
+        :root {
+            --bg: #f9f7f2;
+            --text: #111;
+            --header-bg: #1e1e1e;
+            --header-fg: #fff;
+            --accent: #c9a227;
+            --muted: #444;
+            --border: #e0e0e0;
+            --radius: 12px;
+            --overlay: rgba(0,0,0,0.8);
+        }
 
-    body {
-        font-family: Arial, sans-serif;   /* unchanged */
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-    }
+        body {
+            font-family: Arial, sans-serif; /* unchanged */
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+        }
 
-    .header {
-        background: var(--header-bg);
-        color: var(--header-fg);
-        text-align: center;
-        padding: 18px;
-        font-size: 26px;                 /* unchanged */
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
+        .header {
+            background: var(--header-bg);
+            color: var(--header-fg);
+            text-align: center;
+            padding: 18px;
+            font-size: 26px; /* unchanged */
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
 
-    .container {
-        max-width: 900px;
-        margin: auto;
-        padding: 30px 20px;
-    }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px 20px;
+        }
 
-    .section { margin-bottom: 30px; }
+        .section {
+            margin-bottom: 30px;
+        }
 
-    /* Expander Styling */
-    details {
-        background: var(--bg);
-        border: none;
-        padding: 12px 16px;
-        border-radius: var(--radius);
-    }
+        /* Expander Styling */
+        details {
+            background: var(--bg);
+            border: none;
+            padding: 12px 16px;
+            border-radius: var(--radius);
+        }
 
-    summary {
-        font-size: 22px;                 /* unchanged */
-        font-weight: bold;
-        cursor: pointer;
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        list-style: none;
-        outline: none;
-    }
-    summary:focus-visible {
-        outline: 2px dashed var(--accent);
-        outline-offset: 4px;
-        border-radius: 6px;
-    }
-    summary::-webkit-details-marker { display: none; }
-    summary::before {
-        content: "▶";
-        font-size: 16px;                 /* unchanged */
-        transition: transform 0.2s ease;
-    }
-    details[open] summary::before { transform: rotate(90deg); }
+        summary {
+            font-size: 22px; /* unchanged */
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            list-style: none;
+            outline: none;
+        }
 
-    .divider {
-        height: 2px;
-        background: var(--accent);
-        margin: 12px 0 18px 0;
-        border-radius: 2px;
-    }
+            summary:focus-visible {
+                outline: 2px dashed var(--accent);
+                outline-offset: 4px;
+                border-radius: 6px;
+            }
 
-    .note {
-        font-size: 14px;                 /* unchanged */
-        color: var(--muted);
-        margin-bottom: 16px;
-    }
+            summary::-webkit-details-marker {
+                display: none;
+            }
 
-    /* Helper block for notes (replaces <br>) */
-    .note-block { margin-bottom: 16px; }
-    .note-title {
-        font-size: 18px;                 /* same as .item-name size for visual consistency */
-        font-weight: bold;
-        margin-bottom: 4px;
-    }
+            summary::before {
+                content: "▶";
+                font-size: 16px; /* unchanged */
+                transition: transform 0.2s ease;
+            }
 
-    .item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 18px;
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 12px;
-    }
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
 
-    .item-info { flex: 1; }
+        .divider {
+            height: 2px;
+            background: var(--accent);
+            margin: 12px 0 18px 0;
+            border-radius: 2px;
+        }
 
-    .item-name {
-        font-size: 18px;                 /* unchanged */
-        font-weight: bold;
-    }
+        .note {
+            font-size: 14px; /* unchanged */
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
 
-    .item-desc {
-        font-size: 14px;                 /* unchanged */
-        color: var(--muted);
-        margin: 4px 0;
-    }
+        /* Helper block for notes (replaces <br>) */
+        .note-block {
+            margin-bottom: 16px;
+        }
 
-    .price {
-        font-size: 16px;                 /* unchanged */
-        font-weight: bold;
-        margin-top: 4px;
-    }
+        .note-title {
+            font-size: 18px; /* same as .item-name size for visual consistency */
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
 
-    .item-img {
-        width: 80px;                     /* unchanged */
-        height: 80px;                    /* unchanged */
-        object-fit: cover;
-        border-radius: 10px;             /* unchanged */
-        flex-shrink: 0;
-        cursor: pointer;
-        transition: transform 0.2s;
-        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    }
-    .item-img:hover { transform: scale(1.05); }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+        }
 
-    /* Modal */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 999;
-        inset: 0;
-        background: var(--overlay);
-    }
+        .item-info {
+            flex: 1;
+        }
 
-    .modal-content {
-        display: block;
-        max-width: 90%;
-        max-height: 90%;
-        margin: auto;
-        margin-top: 5%;
-        border-radius: 12px;             /* unchanged */
-    }
+        .item-name {
+            font-size: 18px; /* unchanged */
+            font-weight: bold;
+        }
 
-    .close {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        color: #fff;
-        font-size: 35px;                 /* unchanged */
-        font-weight: bold;
-        cursor: pointer;
-        line-height: 1;
-        user-select: none;
-    }
+        .item-desc {
+            font-size: 14px; /* unchanged */
+            color: var(--muted);
+            margin: 4px 0;
+        }
 
-    /* Optional: dark-mode polish without changing sizes */
-    @media (prefers-color-scheme: dark){
-        body { background:#0f0f10; color:#eee; }
-        .header { background:#000; color:#fff; }
-        .note { color:#bbb; }
-        .divider { background: #e0b63a; }
-        .item { border-bottom-color:#2b2b2b; }
-    }
-</style>
+        .price {
+            font-size: 16px; /* unchanged */
+            font-weight: bold;
+            margin-top: 4px;
+        }
+
+        .item-img {
+            width: 80px; /* unchanged */
+            height: 80px; /* unchanged */
+            object-fit: cover;
+            border-radius: 10px; /* unchanged */
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+
+            .item-img:hover {
+                transform: scale(1.05);
+            }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            inset: 0;
+            background: var(--overlay);
+        }
+
+        .modal-content {
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            margin-top: 5%;
+            border-radius: 12px; /* unchanged */
+        }
+
+
+        /* Thin top review bar */
+
+        .topbar {
+            position: sticky; /* or use fixed for always-on-top */
+            top: 0;
+            z-index: 1000;
+        }
+
+
+            .topbar a {
+                color: #111;
+                text-decoration: none;
+                font-size: 16px; /* explicit */
+                font-weight: bold;
+            }
+
+                .topbar a:hover,
+                .topbar a:focus {
+                    text-decoration: underline;
+                    outline: none;
+                }
+
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 35px; /* unchanged */
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            user-select: none;
+        }
+
+        /* Optional: dark-mode polish without changing sizes */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #0f0f10;
+                color: #eee;
+            }
+
+            .header {
+                background: #000;
+                color: #fff;
+            }
+
+            .note {
+                color: #bbb;
+            }
+
+            .divider {
+                background: #e0b63a;
+            }
+
+            .item {
+                border-bottom-color: #2b2b2b;
+            }
+        }
+    </style>
 </head>
 
 <body>
+
+
+    <div class="topbar">
+        Love your meal? <a href="https://g.page/r/your-google-review-link"
+                           target="_blank"
+                           rel="noopener"
+                           aria-label="Leave us a Google review (opens in new tab)">Leave a review ★</a>
+    </div>
 
     <!-- Modal -->
     <div id="imgModal" class="modal" aria-hidden="true" role="dialog" aria-label="Image preview modal">
@@ -775,19 +841,19 @@
     </div><!-- /container -->
 
     <script>
-        (function(){
+        (function () {
             const modal = document.getElementById("imgModal");
             const modalImg = document.getElementById("modalImg");
             const closeBtn = document.querySelector(".close");
 
-            function openModal(src, alt){
+            function openModal(src, alt) {
                 modal.style.display = "block";
                 modal.setAttribute("aria-hidden", "false");
                 modalImg.src = src;
                 modalImg.alt = (alt || "image") + " (preview)";
                 document.body.style.overflow = "hidden";
             }
-            function closeModal(){
+            function closeModal() {
                 modal.style.display = "none";
                 modal.setAttribute("aria-hidden", "true");
                 modalImg.src = "";
@@ -797,12 +863,12 @@
 
             document.querySelectorAll(".item-img").forEach(img => {
                 img.addEventListener("click", () => openModal(img.src, img.alt));
-                img.setAttribute("loading","lazy");
-                img.setAttribute("decoding","async");
+                img.setAttribute("loading", "lazy");
+                img.setAttribute("decoding", "async");
             });
 
             closeBtn.addEventListener("click", closeModal);
-            closeBtn.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" ") closeModal(); });
+            closeBtn.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") closeModal(); });
             modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
             document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
         })();
