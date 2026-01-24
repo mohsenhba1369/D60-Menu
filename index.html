@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>D60 Restaurant</title>
+<title>D60 Restaurant Menu</title>
 
 <style>
 :root {
@@ -16,6 +16,7 @@
     --border: #e0e0e0;
 }
 
+/* Base */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -23,6 +24,7 @@ body {
     color: var(--text);
 }
 
+/* Header */
 .header {
     background: var(--header-bg);
     color: var(--header-fg);
@@ -30,8 +32,10 @@ body {
     padding: 18px;
     font-size: 26px;
     font-weight: bold;
+    letter-spacing: 1px;
 }
 
+/* Review button under header */
 .review-wrap {
     text-align: center;
     margin: 10px 0 20px;
@@ -39,46 +43,56 @@ body {
 
 .review-link {
     display: inline-block;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: #111;
     text-decoration: none;
     background: var(--accent);
-    padding: 6px 14px;
-    border-radius: 20px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    transition: background 0.15s ease, transform 0.15s ease;
 }
 
+.review-link:hover {
+    background: #b08d21;
+    transform: translateY(-1px);
+}
+
+/* Layout */
 .container {
     max-width: 900px;
     margin: auto;
     padding: 0 20px 40px;
 }
 
+/* Sections */
+.section {
+    margin-bottom: 24px;
+}
+
+/* details / summary */
 details {
     border-bottom: 1px solid var(--border);
     padding: 8px 0;
 }
 
 summary {
-    list-style: none;
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
-    display: flex;
-    align-items: center;
+    list-style: none;
+    padding: 10px 0;
 }
 
-summary::-webkit-details-marker {
-    display: none;
-}
+/* Remove default arrow */
+summary::-webkit-details-marker { display: none; }
+summary::marker { content: ""; }
 
-summary::marker {
-    content: "";
-}
-
+/* Custom arrow */
 summary::before {
     content: "▶";
-    margin-right: 10px;
+    display: inline-block;
+    margin-right: 8px;
     transition: transform 0.2s ease;
 }
 
@@ -86,36 +100,151 @@ details[open] summary::before {
     transform: rotate(90deg);
 }
 
-.details-content {
-    padding: 10px 0 20px 26px;
+/* Divider */
+.divider {
+    height: 2px;
+    background: var(--accent);
+    margin: 10px 0 18px;
+    border-radius: 2px;
+}
+
+/* Items */
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.item-desc {
+    font-size: 14px;
     color: var(--muted);
-    line-height: 1.6;
+    margin: 4px 0;
+}
+
+.price {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">D60 Restaurant</div>
+<div class="header">
+    D60 Restaurant Menu
+</div>
 
 <div class="review-wrap">
-    <a class="review-link" href="#">
+    <a class="review-link"
+       href="https://g.page/r/your-google-review-link"
+       target="_blank">
         ★ Leave a Review
     </a>
 </div>
 
 <div class="container">
 
-    <details open>
-        <summary>Burgers</summary>
-        <div class="details-content">
-            Choose 1 free side: Fries · Coleslaw · Garden Salad<br><br>
-            Upgrade: Poutine (+$3.5) · Onion Rings (+$3.0)<br><br>
-            Add-ons: Bacon · Cheese · Egg
-        </div>
-    </details>
+<!-- Appetizers -->
+<div class="section">
+<details open>
+<summary>Appetizers & Snacks</summary>
+<div class="divider"></div>
 
+<div class="item">
+    <div class="item-info">
+        <div class="item-name">Special Fries</div>
+        <div class="item-desc">Large cut fries, deli, cheese & mushroom</div>
+        <div class="price">$11.99</div>
+    </div>
+    <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="">
 </div>
 
+<div class="item">
+    <div class="item-info">
+        <div class="item-name">Poutine</div>
+        <div class="price">$6.99 | $9.99</div>
+    </div>
+    <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="">
+</div>
+
+<div class="item">
+    <div class="item-info">
+        <div class="item-name">Falafel</div>
+        <div class="item-desc">5 pieces</div>
+        <div class="price">$5.99</div>
+    </div>
+    <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="">
+</div>
+
+</details>
+</div>
+
+<!-- Smash Burgers -->
+<div class="section">
+<details>
+<summary>Smash Burgers</summary>
+<div class="divider"></div>
+
+<div class="item">
+    <div class="item-info">
+        <div class="item-name">Classic Burger</div>
+        <div class="item-desc">2×100g beef, onion, pickle, lettuce</div>
+        <div class="price">$13.99</div>
+    </div>
+    <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="">
+</div>
+
+<div class="item">
+    <div class="item-info">
+        <div class="item-name">Cheese Burger</div>
+        <div class="item-desc">Cheddar, special sauce</div>
+        <div class="price">$13.99</div>
+    </div>
+    <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="">
+</div>
+
+</details>
+</div>
+
+<!-- Sandwiches -->
+<div class="section">
+<details>
+<summary>Sandwiches</summary>
+<div class="divider"></div>
+
+<div class="item">
+    <div class="item-info">
+        <div class="item-name">Bandari</div>
+        <div class="item-desc">Sausage, onion, tomato</div>
+        <div class="price">$13.99</div>
+    </div>
+    <img class="item-img" src="D_MexicanCorn_Native.jpg" alt="">
+</div>
+
+</details>
+</div>
+
+</div>
 </body>
 </html>
